@@ -37,7 +37,7 @@ CREATE TABLE Booking (
 CREATE TABLE Category (
     category_id int  NOT NULL,
     name text  NOT NULL,
-    Mother_category_id int  NOT NULL,
+    Mother_category_id int,
     CONSTRAINT Category_pk PRIMARY KEY (category_id)
 );
 
@@ -63,48 +63,48 @@ CREATE TABLE Reader (
 -- Reference: BookCopy_Book (table: BookCopy)
 ALTER TABLE BookCopy ADD CONSTRAINT BookCopy_Book
     FOREIGN KEY (Book_ISBN)
-    REFERENCES Book (ISBN)  
-    NOT DEFERRABLE 
+    REFERENCES Book (ISBN)
+    NOT DEFERRABLE
     INITIALLY IMMEDIATE
 ;
 
 -- Reference: BookCopy_Booking (table: BookCopy)
 ALTER TABLE BookCopy ADD CONSTRAINT BookCopy_Booking
     FOREIGN KEY (Booking_booking_id)
-    REFERENCES Booking (booking_id)  
-    NOT DEFERRABLE 
+    REFERENCES Booking (booking_id)
+    NOT DEFERRABLE
     INITIALLY IMMEDIATE
 ;
 
 -- Reference: Book_Category (table: Book)
 ALTER TABLE Book ADD CONSTRAINT Book_Category
     FOREIGN KEY (Category_category_id)
-    REFERENCES Category (category_id)  
-    NOT DEFERRABLE 
+    REFERENCES Category (category_id)
+    NOT DEFERRABLE
     INITIALLY IMMEDIATE
 ;
 
 -- Reference: Book_Publisher (table: Book)
 ALTER TABLE Book ADD CONSTRAINT Book_Publisher
     FOREIGN KEY (Publisher_name)
-    REFERENCES Publisher (name)  
-    NOT DEFERRABLE 
+    REFERENCES Publisher (name)
+    NOT DEFERRABLE
     INITIALLY IMMEDIATE
 ;
 
 -- Reference: Booking_Reader (table: Booking)
 ALTER TABLE Booking ADD CONSTRAINT Booking_Reader
     FOREIGN KEY (Reader_reader_id)
-    REFERENCES Reader (reader_id)  
-    NOT DEFERRABLE 
+    REFERENCES Reader (reader_id)
+    NOT DEFERRABLE
     INITIALLY IMMEDIATE
 ;
 
 -- Reference: Category_Category (table: Category)
 ALTER TABLE Category ADD CONSTRAINT Category_Category
     FOREIGN KEY (Mother_category_id)
-    REFERENCES Category (category_id)  
-    NOT DEFERRABLE 
+    REFERENCES Category (category_id)
+    NOT DEFERRABLE
     INITIALLY IMMEDIATE
 ;
 
