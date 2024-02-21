@@ -55,3 +55,24 @@ ORDER BY year
 LIMIT 10;
 
 
+
+---- 2 task
+
+-- Добавление записи о бронировании читателем 'Василием Петровым' книги с ISBN 123456 и номером копии 4
+INSERT INTO booking (reader_reader_id, , CopyNumber, ReturnDate)
+VALUES (
+   (SELECT number FROM Reader WHERE FirstName = 'Василий' AND LastName = 'Петров'),
+   '123456',
+   4,
+   NULL
+);
+
+-- Удаление всех книг, год публикации которых превышает 2000 год
+DELETE FROM Book
+WHERE PubYear > 2000;
+
+-- Изменение даты возврата для всех книг категории "Базы данных", начиная с 01.01.2016, чтобы они были в заимствовании на 30 дней дольше
+UPDATE Borrowing
+SET ReturnDate = ReturnDate + INTERVAL 30 DAY
+WHERE ISBN IN (SELECT ISBN FROM BookCat WHERE CategoryName = 'Базы данных')
+AND ReturnDate >= '2016-01-01';
